@@ -1,4 +1,16 @@
 body {
-    color: white;
-    background: red;
+    color: black;
+    background: white;
+}
+nav.navbar {
+display: flex;
+justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
 }

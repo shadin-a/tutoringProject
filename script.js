@@ -1,19 +1,21 @@
-// TUTORING NOTES
-// a button to load quiz page vs the button for next question
-// cycle through succesfully
-// after cycling, add check answer
-//collect answer data
-//assign score
-//submit button on last question presents score
-//optional: (add timer. import react for CSS needs?)
+//CONST TO START GAME
+const startButton = document.getElementById('startButton');
+const welcomeScreen = document.getElementById('welcomeScreen');
+const questionScreen = document.getElementById('questionScreen');
+const timerEl = document.getElementById('timer');
 
+//CONST FOR NEXT QUESTIONS
+const nextButton = document.getElementById('nextButton');
+//CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
 const optionA = document.getElementById("A");
 const optionB = document.getElementById("B");
 const optionC = document.getElementById("C");
 const optionD = document.getElementById("D");
-const nextButton = document.getElementById("nextButton")
-var quizQuestions = [
+
+let currentQuestion = 0;
+
+const quizQuestions = [
     {
         question: "Q1: What is the most common disease on a pirate ship?",
         answers: {
@@ -33,16 +35,50 @@ var quizQuestions = [
             d: "a conventicle"
         },
         correctAnswer: 'b',
+    },
+    {
+        question: "Q3: What is a frog?",
+        answers: {
+            a: "a reptile",
+            b: "an amphibian",
+            c: "part of a horse hoof",
+            d: "B & C"
+        },
+        correctAnswer: 'd',
     }
 ];
+function startGame() {
+    //change css to visible all else to hidden
+   welcomeScreen.classList.add('hidden');
+   questionScreen.classList.remove('hidden');
+   timerEl.classList.remove('invisible');
 
-function nextQuestion() {
-for (let i = 0; i < quizQuestions.length; i++){
-quizContainer.innerHTML = question[i],
-quizContainer.innerHTML = question[i].answers.a,
-quizContainer.innerHTML = question[i].answers.b,
-quizContainer.innerHTML = question[i].answers.c,
-quizContainer.innerHTML = question[i].answers.d;
+   startTimer();
+   populateQuestions();
 }
+
+function populateQuestions() {
+   
+    quizContainer.textContent = quizQuestions[currentQuestion].question;
+    optionA.textContent = quizQuestions[currentQuestion].answers.a;
+    optionB.textContent = quizQuestions[currentQuestion].answers.b;
+    optionC.textContent = quizQuestions[currentQuestion].answers.c;
+    optionD.textContent = quizQuestions[currentQuestion].answers.d;
+    console.log('questions show up here');
+
+    //loop for answer options
 }
-nextButton.addEventListener('click', nextQuestion())
+
+function startTimer(){
+    //find countdown timer js
+    console.log("to-do: start timer")
+}
+
+function nextQuestion(){
+    console.log("where is my next question?")
+    currentQuestion++;
+    populateQuestions();
+}
+
+nextButton.addEventListener('click',nextQuestion);
+startButton.addEventListener('click', startGame)
