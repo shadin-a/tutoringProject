@@ -1,3 +1,12 @@
+// TUTORING NOTES
+// a button to load quiz page vs the button for next question
+// cycle through succesfully
+// after cycling, add check answer
+//collect answer data
+//assign score
+//submit button on last question presents score
+//optional: (add timer. import react for CSS needs?)
+
 const quizContainer = document.getElementById("quizContainer");
 const optionA = document.getElementById("A");
 const optionB = document.getElementById("B");
