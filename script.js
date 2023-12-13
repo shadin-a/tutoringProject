@@ -2,6 +2,7 @@
 const startButton = document.getElementById('startButton');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
+const gameOverScreen = document.getElementById('gameOverScreen');
 const timerEl = document.getElementById('timer');
 
 //CONST FOR NEXT QUESTIONS
@@ -49,16 +50,16 @@ const quizQuestions = [
 ];
 function startGame() {
     //change css to visible all else to hidden
-   welcomeScreen.classList.add('hidden');
-   questionScreen.classList.remove('hidden');
-   timerEl.classList.remove('invisible');
+    welcomeScreen.classList.add('hidden');
+    questionScreen.classList.remove('hidden');
+    timerEl.classList.remove('invisible');
 
-   startTimer();
-   populateQuestions();
+    startTimer();
+    populateQuestions();
 }
 
 function populateQuestions() {
-   
+
     quizContainer.textContent = quizQuestions[currentQuestion].question;
     optionA.textContent = quizQuestions[currentQuestion].answers.a;
     optionB.textContent = quizQuestions[currentQuestion].answers.b;
@@ -69,16 +70,27 @@ function populateQuestions() {
     //loop for answer options
 }
 
-function startTimer(){
+function startTimer() {
     //find countdown timer js
     console.log("to-do: start timer")
 }
 
-function nextQuestion(){
+function nextQuestion() {
     console.log("where is my next question?")
     currentQuestion++;
-    populateQuestions();
+    if (currentQuestion >= quizQuestions.length) {
+        endGame();
+    }
+    else populateQuestions();
 }
 
-nextButton.addEventListener('click',nextQuestion);
-startButton.addEventListener('click', startGame)
+function endGame(){
+    //stop timer
+questionScreen.classList.add('hidden');
+gameOverScreen.classList.remove('hidden');
+
+}
+
+nextButton.addEventListener('click', nextQuestion);
+startButton.addEventListener('click', startGame);
+
