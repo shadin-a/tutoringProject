@@ -3,10 +3,16 @@ const startButton = document.getElementById('startButton');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
+//CONST FOR TIMER
 const timerEl = document.getElementById('timer');
+const secondsLeftEl = document.getElementById('seconds');
+var timerInterval;
+var timeRemaining = 5;
 
 //CONST FOR NEXT QUESTIONS
 const nextButton = document.getElementById('nextButton');
+//CONST FOR RADIO BUTTONS
+const radioButtons = document.querySelectorAll('input[type="radio"]')
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
 const optionA = document.getElementById("A");
@@ -53,26 +59,31 @@ function startGame() {
     welcomeScreen.classList.add('hidden');
     questionScreen.classList.remove('hidden');
     timerEl.classList.remove('invisible');
-
+    secondsLeftEl.textContent = timeRemaining;
     startTimer();
     populateQuestions();
 }
 
 function populateQuestions() {
-
+    radioButtons.forEach((radioButton) => { radioButton.checked = false })
     quizContainer.textContent = quizQuestions[currentQuestion].question;
+    //loop for answer options
     optionA.textContent = quizQuestions[currentQuestion].answers.a;
     optionB.textContent = quizQuestions[currentQuestion].answers.b;
     optionC.textContent = quizQuestions[currentQuestion].answers.c;
     optionD.textContent = quizQuestions[currentQuestion].answers.d;
-    console.log('questions show up here');
 
-    //loop for answer options
 }
 
 function startTimer() {
-    //find countdown timer js
-    console.log("to-do: start timer")
+    timerInterval = setInterval(() => {
+        timeRemaining--
+        secondsLeftEl.textContent = timeRemaining;
+        if (timeRemaining <= 0) {
+            endGame();
+        }
+    }, 1000);
+
 }
 
 function nextQuestion() {
@@ -84,10 +95,11 @@ function nextQuestion() {
     else populateQuestions();
 }
 
-function endGame(){
+function endGame() {
     //stop timer
-questionScreen.classList.add('hidden');
-gameOverScreen.classList.remove('hidden');
+    questionScreen.classList.add('hidden');
+    gameOverScreen.classList.remove('hidden');
+    clearInterval(timerInterval);
 
 }
 
