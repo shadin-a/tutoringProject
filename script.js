@@ -1,5 +1,4 @@
 //CONST TO START GAME
-const startButton = document.getElementById('startButton');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
@@ -10,8 +9,10 @@ const secondsLeftEl = document.getElementById('seconds');
 var timerInterval;
 var timeRemaining = 100;
 
-//CONST FOR NEXT QUESTIONS
+//CONST FOR BUTTONS
+const startButton = document.getElementById('startButton');
 const nextButton = document.getElementById('nextButton');
+const restartButton = document.getElementById('restartButton');
 //CONST FOR RADIO BUTTONS
 const radioButtons = document.querySelectorAll('input[type="radio"]')
 //CONST FOR SCORE
@@ -142,7 +143,17 @@ function displayHighScores() {
 
 }
 
+function newGame() {
+    welcomeScreen.classList.remove('hidden');
+    highScoresScreen.classList.add('hidden')
+    gameOverScreen.classList.add('hidden');
+    questionScreen.classList.add('hidden');
+    timerEl.classList.add('invisible');
+
+}
+
 nextButton.addEventListener('click', evaluateAnswer);
 startButton.addEventListener('click', startGame);
 submitInitials.addEventListener('submit', saveInitials);
+restartButton.addEventListener('click', newGame);
 
