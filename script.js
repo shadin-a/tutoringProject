@@ -1,3 +1,4 @@
+//=============CONSTANTS=============//
 //CONST TO START GAME
 const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
@@ -61,6 +62,9 @@ const quizQuestions = [
         correctAnswer: 'd',
     }
 ];
+
+//=============FUNCTIONS=============//
+
 function startGame() {
     //change css to visible all else to hidden
     welcomeScreen.classList.add('hidden');
@@ -79,6 +83,7 @@ function populateQuestions() {
     optionB.textContent = quizQuestions[currentQuestion].answers.b;
     optionC.textContent = quizQuestions[currentQuestion].answers.c;
     optionD.textContent = quizQuestions[currentQuestion].answers.d;
+    console.log("am i getting populated?")
 
 }
 
@@ -94,6 +99,7 @@ function startTimer() {
 }
 
 function evaluateAnswer() {
+    console.log("Am i getting evaluated?")
     let userChoice;
     questionScreen.querySelectorAll('label').forEach((label) => { if (label.previousElementSibling.checked) { userChoice = label.id } })
     if (quizQuestions[currentQuestion].correctAnswer == userChoice) { currentScore += 10 };
@@ -143,12 +149,17 @@ function displayHighScores() {
 
 }
 
-function newGame() {
+function newGame(event) {
+    event.returnValue = true;
     welcomeScreen.classList.remove('hidden');
     highScoresScreen.classList.add('hidden')
     gameOverScreen.classList.add('hidden');
     questionScreen.classList.add('hidden');
     timerEl.classList.add('invisible');
+    document.getElementById('playersInitials').value = ''
+    currentQuestion = 0;
+    currentScore = 0;
+    timeRemaining = 100;
 
 }
 
