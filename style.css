@@ -2,22 +2,27 @@ body {
     color: black;
     background: white;
     font-family: "Baskerville", serif;
-
+    background-image: url('question-backgroundImage.png');
+    background-repeat: no-repeat;
 }
 
 .custom-jumbotron {
-    max-width: 50%;
-    margin: 0 auto; /* Center the Jumbotron */
+    max-width: 40%;
+    margin: 0 auto;
+    /* Center the Jumbotron */
     margin-top: 3%;
-  }
+    opacity: 90%;
+}
 
 nav.navbar {
-display: flex;
-justify-content: space-between;
-margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0%;
 }
+
 nav.button {
-    background-color: #e7e7e7; color: black;
+    background-color: #e7e7e7;
+    color: black;
 }
 
 .hidden {
@@ -27,6 +32,7 @@ nav.button {
 .invisible {
     visibility: hidden;
 }
+
 label {
     margin-left: 10px;
-  }
+}

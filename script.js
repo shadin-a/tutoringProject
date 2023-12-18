@@ -4,6 +4,7 @@ const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
 const highScoresScreen = document.getElementById("highScoresScreen");
+
 //CONST FOR TIMER
 const timerEl = document.getElementById('timer');
 const secondsLeftEl = document.getElementById('seconds');
@@ -16,12 +17,15 @@ const nextButton = document.getElementById('nextButton');
 const restartButton = document.getElementById('restartButton');
 const highScoreTab = document.getElementById('highScoreTab');
 const welcomeTab = document.getElementById('welcomeTab');
+
 //CONST FOR RADIO BUTTONS
 const radioButtons = document.querySelectorAll('input[type="radio"]')
+
 //CONST FOR SCORE
 let currentScore = 0;
 const playersInitials = document.getElementById("playersInitials");
 const highScoresTable = document.getElementById("highScoresTable");
+const yourScore = document.getElementById("yourScore");
 
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
@@ -121,7 +125,7 @@ function endGame() {
     clearInterval(timerInterval);
     //add time remaining to current score
     currentScore += timeRemaining;
-    console.log(currentScore);
+    yourScore.textContent = currentScore;
 }
 
 

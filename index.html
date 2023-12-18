@@ -13,12 +13,13 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="flex-sm-fill text-sm-center nav-link" > <button id="welcomeTab" class="btn btn-info">Quiz </button></div>
+        <div class="flex-sm-fill text-sm-center nav-link invisible bg-info text-white" id="timer" class="invisible">Time Remaining: <span id ="seconds">0</span> </div>
         <div class="flex-sm-fill text-sm-center nav-link" > <button id="highScoreTab" class="btn btn-info"> Highscore </button></div>
-        <div class="flex-sm-fill text-sm-center nav-link" > <button id="welcomeTab" class="btn btn-info">Take Quiz </button></div>
-        <div class="flex-sm-fill text-sm-center nav-link invisible" id="timer" class="invisible">Time Remaining: <span id ="seconds">0</span> </div>
+ 
 
     </nav>
-    <div class="mx-auto p-2 jumbotron custom-jumbotron container text-center" style="width: 45%;" id="welcomeScreen">
+    <div class="mx-auto p-2 jumbotron custom-jumbotron container text-center" id="welcomeScreen">
 
         <h1> General Knowledge Quiz</h1>
 
@@ -59,6 +60,7 @@
 
     <div id="gameOverScreen" class=" container hidden text-center jumbotron custom-jumbotron">
         <h2 class="display-5"> Game Over!</h2>
+        <h1 id="yourScore"></h1>
         <form id="submitInitials">
             <label>
                 <input type="text" id="playersInitials" placeholder="Input your initials here"/>
@@ -67,7 +69,7 @@
             <button class="btn btn-info btn-sm mt-2 " type="submit">Submit</button>
         </form>
     </div>
-    <div id="highScoresScreen" class="hidden text-center">
+    <div id="highScoresScreen" class="hidden text-center mx-auto p-2 jumbotron custom-jumbotron container">
         <h2> HIGH SCORES </h2>
         <div class="container" id="highScoreTable">
             <table class="table">
@@ -94,5 +96,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 <script src="script.js"></script>
+
 
 </html>
