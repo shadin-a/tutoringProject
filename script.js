@@ -16,7 +16,9 @@ const nextButton = document.getElementById('nextButton');
 const radioButtons = document.querySelectorAll('input[type="radio"]')
 //CONST FOR SCORE
 let currentScore = 0;
-const submitInitials = document.getElementById("submitInitials");
+const playersInitials = document.getElementById("playersInitials");
+const initialsCol = document.getElementById("initialsCol");
+const scoreCol = document.getElementById("scoreCol");
 
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
@@ -119,16 +121,19 @@ function endGame() {
 
 function saveInitials(event) {
     event.preventDefault();
-    console.log('submitting initials')
-    localStorage.setItem('scoresHistory', submitInitials.value)
+    let initials = playersInitials.value;
+    var highScoreData = [
+        {initials: initials, score: currentScore}
+    ];
+    window.localStorage.setItem('scoreHistory', JSON.stringify(highScoreData));
     displayHighScores();
 }
 
 function displayHighScores() {
-    gameOverScreen.classList.remove('hidden');
-
-    localStorage.getItem('scoresHistory')
-    console.log(localStorage)
+    var storedHighScores =    JSON.parse(localStorage.getItem('scoreHistory'))
+    highScoresScreen.classList.remove('hidden')
+    gameOverScreen.classList.add('hidden');
+    console.log(storedHighScores[0].initials);
 }
 
 nextButton.addEventListener('click', evaluateAnswer);
