@@ -8,12 +8,14 @@ const highScoresScreen = document.getElementById("highScoresScreen");
 const timerEl = document.getElementById('timer');
 const secondsLeftEl = document.getElementById('seconds');
 var timerInterval;
-var timeRemaining = 100;
+var timeRemaining = 25;
 
 //CONST FOR BUTTONS
 const startButton = document.getElementById('startButton');
 const nextButton = document.getElementById('nextButton');
 const restartButton = document.getElementById('restartButton');
+const highScoreTab = document.getElementById('highScoreTab');
+const welcomeTab = document.getElementById('welcomeTab');
 //CONST FOR RADIO BUTTONS
 const radioButtons = document.querySelectorAll('input[type="radio"]')
 //CONST FOR SCORE
@@ -32,7 +34,7 @@ let currentQuestion = 0;
 
 const quizQuestions = [
     {
-        question: "Q1: What is the most common disease on a pirate ship?",
+        question: "What is the most common disease on a pirate ship?",
         answers: {
             a: "Scurvy",
             b: "Pox",
@@ -42,7 +44,7 @@ const quizQuestions = [
         correctAnswer: 'a',
     },
     {
-        question: "Q2: What is a group of pandas known as?",
+        question: "What is a group of pandas known as?",
         answers: {
             a: "a mischief",
             b: "am embarassment",
@@ -52,7 +54,7 @@ const quizQuestions = [
         correctAnswer: 'b',
     },
     {
-        question: "Q3: What is a frog?",
+        question: "What is a frog?",
         answers: {
             a: "a reptile",
             b: "an amphibian",
@@ -99,7 +101,6 @@ function startTimer() {
 }
 
 function evaluateAnswer() {
-    console.log("Am i getting evaluated?")
     let userChoice;
     questionScreen.querySelectorAll('label').forEach((label) => { if (label.previousElementSibling.checked) { userChoice = label.id } })
     if (quizQuestions[currentQuestion].correctAnswer == userChoice) { currentScore += 10 };
@@ -107,7 +108,6 @@ function evaluateAnswer() {
 }
 
 function nextQuestion() {
-    console.log("where is my next question?")
     currentQuestion++;
     if (currentQuestion >= quizQuestions.length) {
         endGame();
@@ -136,6 +136,7 @@ function saveInitials(event) {
 }
 
 function displayHighScores() {
+    restartButton.classList.remove('hidden');
     var storedHighScores = JSON.parse(localStorage.getItem('scoreHistory'))
     highScoresScreen.classList.remove('hidden')
     gameOverScreen.classList.add('hidden');
@@ -159,12 +160,24 @@ function newGame(event) {
     document.getElementById('playersInitials').value = ''
     currentQuestion = 0;
     currentScore = 0;
-    timeRemaining = 100;
+    timeRemaining = 25;
 
 }
+
+function showStats() {
+    highScoresScreen.classList.remove('hidden');
+    welcomeScreen.classList.add('hidden');
+    gameOverScreen.classList.add('hidden');
+    questionScreen.classList.add('hidden');
+    timerEl.classList.add('invisible');
+    restartButton.classList.add('hidden');
+}
+
+//=============EVENT LISTENERS=============//
 
 nextButton.addEventListener('click', evaluateAnswer);
 startButton.addEventListener('click', startGame);
 submitInitials.addEventListener('submit', saveInitials);
 restartButton.addEventListener('click', newGame);
-
+highScoreTab.addEventListener("click", showStats);
+welcomeTab.addEventListener('click', newGame);

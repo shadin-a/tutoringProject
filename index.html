@@ -7,68 +7,81 @@
     <title>Shadin's Project!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baskerville">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div id="showHighScores"> Highscore </div>
-        <div id="timer" class="invisible">Time Remaining: <span id ="seconds">0</span> </div>
+        <div class="flex-sm-fill text-sm-center nav-link" > <button id="highScoreTab" class="btn btn-info"> Highscore </button></div>
+        <div class="flex-sm-fill text-sm-center nav-link" > <button id="welcomeTab" class="btn btn-info">Take Quiz </button></div>
+        <div class="flex-sm-fill text-sm-center nav-link invisible" id="timer" class="invisible">Time Remaining: <span id ="seconds">0</span> </div>
 
     </nav>
-    <div id="welcomeScreen">
+    <div class="mx-auto p-2 jumbotron custom-jumbotron container text-center" style="width: 45%;" id="welcomeScreen">
 
         <h1> General Knowledge Quiz</h1>
 
-        <button id="startButton"> Start </button>
+        <button class="btn btn-info btn-sm mt-2 " id="startButton"> Start </button>
     </div>
 
-    <div id="questionScreen" class="hidden">
-        <h2 id="quizContainer"> </h2>
+    <div id="questionScreen" class="hidden jumbotron custom-jumbotron">
 
-        <input type="radio" name="choice" /><label for="A" id="a">
-        </label>
-        <br>
+        <h2 class="display-5 text-center" id="quizContainer"> </h2>
 
-        <input type="radio" name="choice" /><label for="B" id="b">
-        </label>
-        <br>
-
-        <input type="radio" name="choice" /><label for="C" id="c">
-        </label>
-        <br>
-
-        <input type="radio" name="choice" /><label for="D" id="d">
-        </label>
-        <br>
-        <button id="nextButton"> Next</button>
+        <div class="row">
+            <div class="col-md-6 form-control bg-light">
+        <input type="radio" name="choice" /><label for="A" id="a" class="lead">  
+        </div>
         
+        <br>
+            <div class="col-md-6 form-control bg-light">
+        <input type="radio" name="choice" /><label for="B" id="b" class="lead">  
+        </label>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6 form-control bg-light">
+        <input type="radio" name="choice" /><label for="C" id="c" class="lead"> 
+        </div>
+        
+        <br>
+        <div class="col-md-6 form-control bg-light">
+        <input type="radio" name="choice"/><label for="D" id="d" class="lead"> 
+        </div>
+        </div>
+        <br>
+        <div class="container mt-4 text-center"> 
+        <button class="btn btn-info btn-sm mt-2" id="nextButton"> Next</button>
+    </div>
     </div>
 
-    <div id="gameOverScreen" class="hidden">
-        <h2> Game Over!</h2>
+    <div id="gameOverScreen" class=" container hidden text-center jumbotron custom-jumbotron">
+        <h2 class="display-5"> Game Over!</h2>
         <form id="submitInitials">
-            <label>Input Initials
-                <input type="text" id="playersInitials"/>
+            <label>
+                <input type="text" id="playersInitials" placeholder="Input your initials here"/>
             </label>
-            <button type="submit">Submit</button>
+            <br>
+            <button class="btn btn-info btn-sm mt-2 " type="submit">Submit</button>
         </form>
     </div>
-    <div id="highScoresScreen" class="hidden">
-        <h2> High Scores </h2>
+    <div id="highScoresScreen" class="hidden text-center">
+        <h2> HIGH SCORES </h2>
         <div class="container" id="highScoreTable">
             <table class="table">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
-                      <th>Initials</th>
-                      <th>Score</th>
+                      <th>INITIALS</th>
+                      <th>SCORE</th>
                     </tr>
                   </thead>
                   <tbody id="highScoresTable">
                   </tbody>
         </table>
         </div>
-        <button type="submit" id="restartButton">Try Again?</button>
+        <button type="submit" id="restartButton" class="hidden btn btn-info btn-sm mt-2">Try Again?</button>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
