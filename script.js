@@ -3,22 +3,27 @@ const startButton = document.getElementById('startButton');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const questionScreen = document.getElementById('questionScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
+const highScoresScreen = document.getElementById("highScoresScreen");
 //CONST FOR TIMER
 const timerEl = document.getElementById('timer');
 const secondsLeftEl = document.getElementById('seconds');
 var timerInterval;
-var timeRemaining = 5;
+var timeRemaining = 100;
 
 //CONST FOR NEXT QUESTIONS
 const nextButton = document.getElementById('nextButton');
 //CONST FOR RADIO BUTTONS
 const radioButtons = document.querySelectorAll('input[type="radio"]')
+//CONST FOR SCORE
+let currentScore = 0;
+const submitInitials = document.getElementById("submitInitials");
+
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
-const optionA = document.getElementById("A");
-const optionB = document.getElementById("B");
-const optionC = document.getElementById("C");
-const optionD = document.getElementById("D");
+const optionA = document.getElementById("a");
+const optionB = document.getElementById("b");
+const optionC = document.getElementById("c");
+const optionD = document.getElementById("d");
 
 let currentQuestion = 0;
 
@@ -86,6 +91,13 @@ function startTimer() {
 
 }
 
+function evaluateAnswer() {
+    let userChoice;
+    questionScreen.querySelectorAll('label').forEach((label) => { if (label.previousElementSibling.checked) { userChoice = label.id } })
+    if (quizQuestions[currentQuestion].correctAnswer == userChoice) { currentScore += 10 };
+    nextQuestion();
+}
+
 function nextQuestion() {
     console.log("where is my next question?")
     currentQuestion++;
@@ -96,13 +108,30 @@ function nextQuestion() {
 }
 
 function endGame() {
-    //stop timer
     questionScreen.classList.add('hidden');
     gameOverScreen.classList.remove('hidden');
     clearInterval(timerInterval);
-
+    //add time remaining to current score
+    currentScore += timeRemaining;
+    console.log(currentScore);
 }
 
-nextButton.addEventListener('click', nextQuestion);
+
+function saveInitials(event) {
+    event.preventDefault();
+    console.log('submitting initials')
+    localStorage.setItem('scoresHistory', submitInitials.value)
+    displayHighScores();
+}
+
+function displayHighScores() {
+    gameOverScreen.classList.remove('hidden');
+
+    localStorage.getItem('scoresHistory')
+    console.log(localStorage)
+}
+
+nextButton.addEventListener('click', evaluateAnswer);
 startButton.addEventListener('click', startGame);
+submitInitials.addEventListener('submit', saveInitials);
 
