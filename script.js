@@ -17,8 +17,7 @@ const radioButtons = document.querySelectorAll('input[type="radio"]')
 //CONST FOR SCORE
 let currentScore = 0;
 const playersInitials = document.getElementById("playersInitials");
-const initialsCol = document.getElementById("initialsCol");
-const scoreCol = document.getElementById("scoreCol");
+const highScoresTable = document.getElementById("highScoresTable");
 
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
@@ -130,10 +129,17 @@ function saveInitials(event) {
 }
 
 function displayHighScores() {
-    var storedHighScores =    JSON.parse(localStorage.getItem('scoreHistory'))
+    var storedHighScores = JSON.parse(localStorage.getItem('scoreHistory'))
     highScoresScreen.classList.remove('hidden')
     gameOverScreen.classList.add('hidden');
-    console.log(storedHighScores[0].initials);
+    for ( let i = 0; i < storedHighScores.length; i++){
+        var row = highScoresTable.insertRow(i);
+        var initialsCol = row.insertCell(0);
+        var scoreCol = row.insertCell(1);
+        initialsCol.innerHTML = storedHighScores[i].initials;
+        scoreCol.innerHTML = storedHighScores[i].score;
+    }
+
 }
 
 nextButton.addEventListener('click', evaluateAnswer);

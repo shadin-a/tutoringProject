@@ -56,15 +56,18 @@
     </div>
     <div id="highScoresScreen" class="hidden">
         <h2> High Scores </h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm" id="initialsCol">
-                    
-                </div>
-                <div class="col-sm" id="scoreCol">
-                    
-                </div>
-            </div>
+        <div class="container" id="highScoreTable">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th>Initials</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="highScoresTable">
+                    <!-- Data will be populated here -->
+                  </tbody>
+        </table>
         </div>
         <button id="restartButton">Try Again?</button>
     </div>
