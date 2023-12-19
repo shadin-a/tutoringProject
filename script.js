@@ -27,6 +27,7 @@ const playersInitials = document.getElementById("playersInitials");
 const highScoresTable = document.getElementById("highScoresTable");
 const yourScore = document.getElementById("yourScore");
 
+
 //CONST FOR QUIZ QUESTIONS
 const quizContainer = document.getElementById("quizContainer");
 const optionA = document.getElementById("a");
@@ -50,19 +51,19 @@ const quizQuestions = [
     {
         question: "What is a group of pandas known as?",
         answers: {
-            a: "a mischief",
-            b: "am embarassment",
-            c: "a muster",
-            d: "a conventicle"
+            a: "A Mischief",
+            b: "An Embarassment",
+            c: "A Muster",
+            d: "A Conventicle"
         },
         correctAnswer: 'b',
     },
     {
         question: "What is a frog?",
         answers: {
-            a: "a reptile",
-            b: "an amphibian",
-            c: "part of a horse hoof",
+            a: "A Reptile",
+            b: "An Amphibian",
+            c: "Part of a horse hoof",
             d: "B & C"
         },
         correctAnswer: 'd',
@@ -89,7 +90,7 @@ function populateQuestions() {
     optionB.textContent = quizQuestions[currentQuestion].answers.b;
     optionC.textContent = quizQuestions[currentQuestion].answers.c;
     optionD.textContent = quizQuestions[currentQuestion].answers.d;
-    console.log("am i getting populated?")
+
 
 }
 
@@ -132,19 +133,25 @@ function endGame() {
 function saveInitials(event) {
     event.preventDefault();
     let initials = playersInitials.value;
-    var highScoreData = [
-        {initials: initials, score: currentScore}
+    var highScoreData = [{
+
+        'initials': initials,
+        'score': currentScore
+    },
     ];
+
     window.localStorage.setItem('scoreHistory', JSON.stringify(highScoreData));
     displayHighScores();
 }
 
 function displayHighScores() {
-    restartButton.classList.remove('hidden');
     var storedHighScores = JSON.parse(localStorage.getItem('scoreHistory'))
+
+    restartButton.classList.remove('hidden');
     highScoresScreen.classList.remove('hidden')
     gameOverScreen.classList.add('hidden');
-    for ( let i = 0; i < storedHighScores.length; i++){
+
+    for (let i = 0; i < storedHighScores.length; i++) {
         var row = highScoresTable.insertRow(i);
         var initialsCol = row.insertCell(0);
         var scoreCol = row.insertCell(1);
@@ -169,12 +176,13 @@ function newGame(event) {
 }
 
 function showStats() {
-    highScoresScreen.classList.remove('hidden');
+    displayHighScores();
     welcomeScreen.classList.add('hidden');
-    gameOverScreen.classList.add('hidden');
     questionScreen.classList.add('hidden');
     timerEl.classList.add('invisible');
     restartButton.classList.add('hidden');
+
+   
 }
 
 //=============EVENT LISTENERS=============//

@@ -18,6 +18,8 @@ nav.navbar {
     display: flex;
     justify-content: space-between;
     margin: 0%;
+    background-color: #e3f2fd;
+    opacity: 90%;
 }
 
 nav.button {
