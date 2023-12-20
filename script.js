@@ -1,3 +1,4 @@
+
 //=============CONSTANTS=============//
 //CONST TO START GAME
 const welcomeScreen = document.getElementById('welcomeScreen');
@@ -131,33 +132,43 @@ function endGame() {
 
 
 function saveInitials(event) {
+    console.log('save initials')
     event.preventDefault();
-    let initials = playersInitials.value;
-    var highScoreData = [{
 
-        'initials': initials,
-        'score': currentScore
-    },
-    ];
+    const scoresFromStorage = JSON.parse(localStorage.getItem('scoreHistory'))
 
-    window.localStorage.setItem('scoreHistory', JSON.stringify(highScoreData));
+    if (!scoresFromStorage || scoresFromStorage.length === 0) {
+        localStorage.setItem("scoreHistory", JSON.stringify([{
+            initials: playersInitials.value,
+            score: currentScore
+        }]))
+    } else {
+        scoresFromStorage.push({
+            initials: playersInitials.value,
+            score: currentScore
+        })
+        localStorage.setItem("scoreHistory", JSON.stringify(scoresFromStorage))
+    }
+
     displayHighScores();
 }
 
 function displayHighScores() {
-    var storedHighScores = JSON.parse(localStorage.getItem('scoreHistory'))
-
     restartButton.classList.remove('hidden');
     highScoresScreen.classList.remove('hidden')
     gameOverScreen.classList.add('hidden');
 
-    for (let i = 0; i < storedHighScores.length; i++) {
-        var row = highScoresTable.insertRow(i);
-        var initialsCol = row.insertCell(0);
-        var scoreCol = row.insertCell(1);
-        initialsCol.innerHTML = storedHighScores[i].initials;
-        scoreCol.innerHTML = storedHighScores[i].score;
-    }
+    console.log('display high scores')
+    const scoresFromStorage = JSON.parse(localStorage.getItem('scoreHistory'))
+
+    highScoresTable.innerHTML = '';
+
+    scoresFromStorage.sort((a, b) => b.score - a.score).forEach((entry, i) => {
+        const row = document.createElement('tr')
+        row.innerHTML = `<td>${i+1}</td><td>${entry.initials}</td><td>${entry.score}</td>`
+        // row.innerHTML = "<td>" + entry.initials + "</td><td>" + entry.score + "</td>"
+        highScoresTable.append(row)
+    })
 
 }
 
@@ -182,7 +193,7 @@ function showStats() {
     timerEl.classList.add('invisible');
     restartButton.classList.add('hidden');
 
-   
+
 }
 
 //=============EVENT LISTENERS=============//
